@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const ButtonStyled = styled.button`
+interface ButtonStyledProps {
+  variant?: "primary" | "secondary";
+}
+
+export const ButtonStyled = styled.button<ButtonStyledProps>`
   background-color: #6e7681;
   border-radius: 8px;
   border: 1px solid transparent;
@@ -16,4 +20,23 @@ export const ButtonStyled = styled.button`
   &:hover {
     border-color: #646cff;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  ${({ variant }) =>
+    variant === "primary" &&
+    css`
+      background-color: red;
+    `}
+`;
+
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 50px;
+  width: 90%;
 `;
