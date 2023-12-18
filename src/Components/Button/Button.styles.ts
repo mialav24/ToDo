@@ -11,7 +11,7 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
   cursor: pointer;
   font-family: inherit;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 600;
   padding: 15px;
   transition: border-color 0.25s;
   color: #fff;
@@ -30,6 +30,14 @@ export const ButtonStyled = styled.button<ButtonStyledProps>`
     variant === "primary" &&
     css`
       background-color: red;
+      font-weight: 600;
+    `}
+
+  ${({ variant }) =>
+    variant === "secondary" &&
+    css`
+      background-color: #4caf50;
+      font-weight: 600;
     `}
 `;
 
