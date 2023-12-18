@@ -3,17 +3,27 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
 import { GridContainer } from "../Button/Button.styles";
 import Input from "../Input";
+import Modal from "../Modal";
 import { Container, FormContainer } from "./App.styles";
 
 type Data = {
   categories: { id: string; title: string }[] | [];
 };
-
 const App = () => {
   const [categoryTitle, setCategoryTitle] = useState("");
   const [categories, setCategories] = useState<Data>({
     categories: [],
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCategoryTitle(e.target.value);
@@ -46,12 +56,17 @@ const App = () => {
           placeholder="Type your category..."
         />
         {
-          <Button disabled={categoryTitle.length >= 3 ? false : true}>
+          <Button
+            type="submit"
+            disabled={categoryTitle.length >= 3 ? false : true}
+          >
             Create a category
           </Button>
         }
         {categories.categories.length >= 1 && (
-          <Button variant="primary">Create a ToDo</Button>
+          <Button type="button" onClick={openModal} variant="primary">
+            Create a ToDo
+          </Button>
         )}
       </FormContainer>
       <GridContainer>
@@ -60,6 +75,9 @@ const App = () => {
             <div key={id}>{title}</div>
           ))}
       </GridContainer>
+      {isModalOpen && (
+        <Modal categories={categories.categories} closeModal={closeModal} />
+      )}
     </Container>
   );
 };
