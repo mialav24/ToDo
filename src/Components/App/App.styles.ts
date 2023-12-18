@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #30363d;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   min-height: 100vh;
   padding-top: 40px;
 `;
