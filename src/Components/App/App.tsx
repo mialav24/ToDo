@@ -1,10 +1,9 @@
 import { ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
-import { GridContainer } from "../Button/Button.styles";
 import Input from "../Input";
 import Modal from "../Modal";
-import { Container, FormContainer } from "./App.styles";
+import { Container, FormContainer, GridContainer } from "./App.styles";
 
 type Data = {
   categories: { id: string; title: string }[] | [];
@@ -56,14 +55,11 @@ const App = () => {
           placeholder="Type your category..."
         />
         {
-          <Button
-            type="submit"
-            disabled={categoryTitle.length >= 3 ? false : true}
-          >
+          <Button type="submit" disabled={!(categoryTitle.length >= 3)}>
             Create a category
           </Button>
         }
-        {categories.categories.length >= 1 && (
+        {categories.categories.length > 0 && (
           <Button type="button" onClick={openModal} variant="primary">
             Create a ToDo
           </Button>

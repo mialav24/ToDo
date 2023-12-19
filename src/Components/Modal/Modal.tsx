@@ -8,9 +8,14 @@ import {
   TextArea,
 } from "./Modal.styles";
 
+type Category = {
+  id: string;
+  title: string;
+};
+
 type ModalProps = {
   closeModal?: () => void;
-  categories: { id: string; title: string }[] | [];
+  categories: Category[] | [];
 };
 
 const Modal = ({ closeModal, categories }: ModalProps) => {
@@ -18,12 +23,10 @@ const Modal = ({ closeModal, categories }: ModalProps) => {
     <ModalOverlay>
       <ModalContainer>
         <Input placeholder="Type your task's title..." />
-        <TextArea placeholder="Type your task..." name="" id=""></TextArea>
+        <TextArea placeholder="Type your task..." name="" id="" />
         <FormContainer>
-          <select id="">
-            <option value="" disabled selected>
-              -- Select a category --
-            </option>
+          <select>
+            <option>-- Select a category --</option>
             {categories.map(({ id, title }) => (
               <option key={id} value={id}>
                 {title}

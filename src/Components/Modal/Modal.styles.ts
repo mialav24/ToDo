@@ -19,15 +19,13 @@ export const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  height: auto;
-  min-height: 0;
   min-width: 500px;
   padding: 30px;
 `;
 
 export const TextArea = styled.textarea`
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid white;
   font-size: 16px;
   height: 150px;
   outline: none;
