@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const InputStyled = styled.input`
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   font-size: 16px;
   height: 22px;
   outline: none;
@@ -10,7 +10,7 @@ export const InputStyled = styled.input`
   transition: border-color 0.3s ease-in-out;
 
   &:focus {
-    border-color: #4caf50;
+    border: 1px solid #ccc;
   }
   &::placeholder {
     font-size: 12px;
