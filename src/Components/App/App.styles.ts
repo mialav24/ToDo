@@ -15,3 +15,10 @@ export const FormContainer = styled.form`
   max-height: 100px;
   max-width: 600px;
 `;
+export const GridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+  margin: 50px;
+  width: 90%;
+`;
