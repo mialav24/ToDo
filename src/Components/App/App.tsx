@@ -25,7 +25,7 @@ const App = () => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setCategoryTitle(e.target.value);
+    setCategoryTitle(e.target.value.trim());
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
