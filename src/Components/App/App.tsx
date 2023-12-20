@@ -25,16 +25,7 @@ const App = () => {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    let inputValue = e.target.value;
-
-    if (inputValue.trim() !== "") {
-      inputValue =
-        inputValue.charAt(0).toLocaleUpperCase() + inputValue.slice(1);
-    } else if (inputValue.charAt(0) === " ") {
-      return;
-    }
-
-    setCategoryTitle(inputValue);
+    setCategoryTitle(e.target.value.trim());
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
