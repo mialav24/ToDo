@@ -1,3 +1,4 @@
+import { ChangeEvent, useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import {
@@ -16,15 +17,32 @@ type Category = {
 type ModalProps = {
   closeModal?: () => void;
   categories: Category[] | [];
+  onTaskTitleChange: (title: string) => void;
 };
 
-const Modal = ({ closeModal, categories }: ModalProps) => {
+const Modal = ({ closeModal, categories, onTaskTitleChange }: ModalProps) => {
+  const [taskTitle, setTaskTitle] = useState("");
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const title = e.target.value;
+    setTaskTitle(title);
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onTaskTitleChange(taskTitle);
+  };
+
   return (
     <ModalOverlay>
       <ModalContainer>
-        <Input placeholder="Type your task's title..." />
+        <Input
+          placeholder="Type your task's title..."
+          value={taskTitle}
+          onChange={handleInputChange}
+        />
         <TextArea placeholder="Type your task..." name="" id="" />
-        <FormContainer>
+        <FormContainer onSubmit={handleSubmit}>
           <select>
             <option>-- Select a category --</option>
             {categories.map(({ id, title }) => (

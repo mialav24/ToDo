@@ -3,11 +3,19 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
-import { Container, FormContainer, GridContainer } from "./App.styles";
+import {
+  CategoryTitle,
+  Container,
+  FormContainer,
+  GridContainer,
+  Hr,
+  TaskContainer,
+} from "./App.styles";
 
 type Data = {
-  categories: { id: string; title: string }[] | [];
+  categories: { id: string; title: string }[];
 };
+
 const App = () => {
   const [categoryTitle, setCategoryTitle] = useState("");
   const [categories, setCategories] = useState<Data>({
@@ -46,6 +54,10 @@ const App = () => {
     }
   };
 
+  const handleTaskTitleChange = (taskTitle: string) => {
+    console.log(taskTitle);
+  };
+
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
@@ -68,11 +80,27 @@ const App = () => {
       <GridContainer>
         {categories.categories &&
           categories.categories.map(({ id, title }) => (
-            <div key={id}>{title}</div>
+            <TaskContainer key={id}>
+              <div>
+                <CategoryTitle>Category: {title}</CategoryTitle>
+                <Hr />
+                <p>TaskTitle</p>
+              </div>
+              <p>
+                Description: Lorem ipsum dolor, sit amet consectetur adipisicing
+                elit. Neque, maxime quae itaque quos numquam id perferendis
+                pariatur alias voluptatem soluta velit sunt ducimus repellendus
+                voluptatum blanditiis. Dolorem nam provident eos.
+              </p>
+            </TaskContainer>
           ))}
       </GridContainer>
       {isModalOpen && (
-        <Modal categories={categories.categories} closeModal={closeModal} />
+        <Modal
+          categories={categories.categories}
+          closeModal={closeModal}
+          onTaskTitleChange={handleTaskTitleChange}
+        />
       )}
     </Container>
   );
