@@ -1,17 +1,12 @@
+import { ButtonHTMLAttributes } from "react";
 import { ButtonStyled } from "./Button.styles";
 
-type ButtonProps = {
-  children: string;
-  disabled?: boolean;
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary";
 };
 
-const Button = ({ children, variant, disabled }: ButtonProps) => {
-  return (
-    <ButtonStyled disabled={disabled} variant={variant}>
-      {children}
-    </ButtonStyled>
-  );
+const Button = ({ variant, ...props }: ButtonProps) => {
+  return <ButtonStyled {...props} variant={variant} />;
 };
 
 export default Button;
