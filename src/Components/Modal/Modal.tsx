@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Category } from "../../types";
 import Button from "../Button";
 import Input from "../Input";
@@ -29,16 +29,6 @@ const Modal = ({ closeModal, categories, addTaskToCategory }: ModalProps) => {
   const [description, setDescription] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const title = e.target.value;
-    setTaskTitle(title);
-  };
-
-  const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const description = e.target.value;
-    setDescription(description);
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     addTaskToCategory(taskTitle, description, selectedCategoryId);
@@ -51,11 +41,12 @@ const Modal = ({ closeModal, categories, addTaskToCategory }: ModalProps) => {
           <Input
             placeholder="Type your task's title..."
             value={taskTitle}
-            onChange={handleInputChange}
+            onChange={(e) => setTaskTitle(e.target.value)}
           />
           <TextArea
             placeholder="Type your task..."
-            onChange={handleTextAreaChange}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
           <ActionContainer>
             <select onChange={(e) => setSelectedCategoryId(e.target.value)}>
