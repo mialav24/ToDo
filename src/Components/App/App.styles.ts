@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  align-items: center;
   background-color: #30363d;
   display: flex;
-  align-items: center;
   flex-direction: column;
   min-height: 100vh;
   padding-top: 40px;
@@ -15,11 +15,36 @@ export const FormContainer = styled.form`
   max-height: 100px;
   max-width: 600px;
 `;
+
 export const GridContainer = styled.div`
   display: grid;
-  gap: 12px;
+  gap: 10px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  margin: 50px;
+  padding-top: 30px;
   text-transform: capitalize;
   width: 90%;
+`;
+
+export const TaskContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(45deg, #e0e0e0 0%, #2b566e 100%);
+  border-radius: 10px;
+  border: 2px solid #313131;
+  padding: 20px;
+  transition: border-color 0.5s;
+  max-width: 320px;
+
+  &:hover {
+    border-color: #7a7adc;
+  }
+`;
+
+export const Hr = styled.hr`
+  border-style: dashed;
+  color: #2b566e;
+`;
+
+export const CategoryTitle = styled.h1`
+  margin: 0;
 `;

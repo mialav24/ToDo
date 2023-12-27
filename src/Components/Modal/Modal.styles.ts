@@ -47,10 +47,18 @@ export const TextArea = styled.textarea`
 
 export const FormContainer = styled.form`
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+`;
+
+export const ActionContainer = styled.div`
+  display: flex;
+  gap: 10px;
   justify-content: space-between;
 `;
 
-export const ButtonContainer = styled.div`
+export const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
 `;
