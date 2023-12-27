@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { Category } from "../../types";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -11,18 +12,6 @@ import {
   Hr,
   TaskContainer,
 } from "./App.styles";
-
-type Category = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
-
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-};
 
 const App = () => {
   const [categoryTitle, setCategoryTitle] = useState("");
@@ -63,13 +52,13 @@ const App = () => {
     selectedCategoryId: string
   ) => {
     const updatedCategories = categories.map((category) => {
-      if (category.title === selectedCategoryId) {
+      if (category.id === selectedCategoryId) {
         return {
           ...category,
           tasks: [
             ...category.tasks,
             {
-              id: selectedCategoryId,
+              id: uuidv4(),
               title: taskTitle,
               description: description,
             },

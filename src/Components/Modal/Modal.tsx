@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
+import { Category } from "../../types";
 import Button from "../Button";
 import Input from "../Input";
+
 import {
   ActionContainer,
   ButtonsContainer,
@@ -9,18 +11,6 @@ import {
   ModalOverlay,
   TextArea,
 } from "./Modal.styles";
-
-type Task = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-type Category = {
-  id: string;
-  title: string;
-  tasks: Task[];
-};
 
 type AddTaskToCategoryType = (
   taskTitle: string,
@@ -71,7 +61,7 @@ const Modal = ({ closeModal, categories, addTaskToCategory }: ModalProps) => {
             <select onChange={(e) => setSelectedCategoryId(e.target.value)}>
               <option>-- Select a category --</option>
               {categories.map(({ id, title }) => (
-                <option key={id} value={title}>
+                <option key={id} value={id}>
                   {title}
                 </option>
               ))}
@@ -80,13 +70,7 @@ const Modal = ({ closeModal, categories, addTaskToCategory }: ModalProps) => {
               <Button
                 type="submit"
                 variant="secondary"
-                disabled={
-                  !(
-                    taskTitle.length >= 1 &&
-                    description.length >= 1 &&
-                    selectedCategoryId
-                  )
-                }
+                disabled={!taskTitle || !description || !selectedCategoryId}
               >
                 Submit
               </Button>
