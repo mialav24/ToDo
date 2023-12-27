@@ -12,16 +12,21 @@ import {
   TaskContainer,
 } from "./App.styles";
 
-type Data = {
-  categories: { id: string; title: string }[];
+type Category = {
+  id: string;
+  title: string;
+  tasks: Task[];
+};
+
+type Task = {
+  id: string;
+  title: string;
+  description: string;
 };
 
 const App = () => {
   const [categoryTitle, setCategoryTitle] = useState("");
-  const [categories, setCategories] = useState<Data>({
-    categories: [],
-  });
-
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -38,24 +43,42 @@ const App = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const titleExists = categories.categories.some(
+    const titleExists = categories.some(
       (category) => category.title === categoryTitle
     );
     if (titleExists) {
       alert("Category already exists");
     } else {
-      setCategories((prev) => ({
-        categories: [
-          ...prev.categories,
-          { id: uuidv4(), title: categoryTitle },
-        ],
-      }));
+      setCategories((prevCategories) => [
+        ...prevCategories,
+        { id: uuidv4(), title: categoryTitle, tasks: [] },
+      ]);
       setCategoryTitle("");
     }
   };
 
-  const handleTaskTitleChange = (taskTitle: string) => {
-    console.log(taskTitle);
+  const addTaskToCategory = (
+    taskTitle: string,
+    description: string,
+    selectedCategoryId: string
+  ) => {
+    const updatedCategories = categories.map((category) => {
+      if (category.title === selectedCategoryId) {
+        return {
+          ...category,
+          tasks: [
+            ...category.tasks,
+            {
+              id: selectedCategoryId,
+              title: taskTitle,
+              description: description,
+            },
+          ],
+        };
+      }
+      return category;
+    });
+    setCategories(updatedCategories);
   };
 
   return (
@@ -71,35 +94,35 @@ const App = () => {
             Create a category
           </Button>
         }
-        {categories.categories.length > 0 && (
+        {categories.length > 0 && (
           <Button type="button" onClick={openModal} variant="primary">
             Create a ToDo
           </Button>
         )}
       </FormContainer>
       <GridContainer>
-        {categories.categories &&
-          categories.categories.map(({ id, title }) => (
+        {categories &&
+          categories.map(({ id, title, tasks }) => (
             <TaskContainer key={id}>
               <div>
                 <CategoryTitle>Category: {title}</CategoryTitle>
                 <Hr />
-                <p>TaskTitle</p>
+                {tasks.map((taskItem) => (
+                  <div key={taskItem.id}>
+                    <p>TaskTitle: {taskItem.title}</p>
+                    <p>Description: {taskItem.description}</p>
+                    <hr />
+                  </div>
+                ))}
               </div>
-              <p>
-                Description: Lorem ipsum dolor, sit amet consectetur adipisicing
-                elit. Neque, maxime quae itaque quos numquam id perferendis
-                pariatur alias voluptatem soluta velit sunt ducimus repellendus
-                voluptatum blanditiis. Dolorem nam provident eos.
-              </p>
             </TaskContainer>
           ))}
       </GridContainer>
       {isModalOpen && (
         <Modal
-          categories={categories.categories}
+          categories={categories}
           closeModal={closeModal}
-          onTaskTitleChange={handleTaskTitleChange}
+          addTaskToCategory={addTaskToCategory}
         />
       )}
     </Container>
