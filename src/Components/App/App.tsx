@@ -5,8 +5,10 @@ import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
 import {
+  CategoryBox,
   CategoryTitle,
   Container,
+  DeleteButton,
   FormContainer,
   GridContainer,
   Hr,
@@ -17,6 +19,7 @@ const App = () => {
   const [categoryTitle, setCategoryTitle] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(categories);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -70,6 +73,14 @@ const App = () => {
     setCategories(updatedCategories);
   };
 
+  const deleteCategory = (e) => {
+    const categoryId = e.target.value;
+    const filterId = categories.filter((category) => {
+      return category.id !== categoryId;
+    });
+    setCategories(filterId);
+  };
+
   return (
     <Container>
       <FormContainer onSubmit={handleSubmit}>
@@ -94,12 +105,18 @@ const App = () => {
           categories.map(({ id, title, tasks }) => (
             <TaskContainer key={id}>
               <div>
-                <CategoryTitle>Category: {title}</CategoryTitle>
+                <CategoryBox>
+                  <CategoryTitle>Category: {title}</CategoryTitle>
+                  <DeleteButton onClick={deleteCategory} value={id}>
+                    X
+                  </DeleteButton>
+                </CategoryBox>
                 <Hr />
                 {tasks.map((taskItem) => (
                   <div key={taskItem.id}>
                     <p>TaskTitle: {taskItem.title}</p>
                     <p>Description: {taskItem.description}</p>
+                    <button>X</button>
                     <hr />
                   </div>
                 ))}

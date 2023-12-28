@@ -34,6 +34,7 @@ export const TaskContainer = styled.div`
   padding: 20px;
   transition: border-color 0.5s;
   max-width: 320px;
+  position: relative;
 
   &:hover {
     border-color: #7a7adc;
@@ -47,4 +48,26 @@ export const Hr = styled.hr`
 
 export const CategoryTitle = styled.h1`
   margin: 0;
+`;
+
+export const DeleteButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  background-color: red;
+  border-radius: 30px;
+  width: 20px;
+  height: 30px;
+  border: 1px solid #8f9092;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+`;
+
+export const CategoryBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
