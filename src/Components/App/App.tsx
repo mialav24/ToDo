@@ -8,11 +8,15 @@ import {
   CategoryBox,
   CategoryTitle,
   Container,
-  DeleteButton,
+  DeleteCategoryButton,
+  DeleteTaskButton,
+  Description,
+  DescriptionContainer,
   FormContainer,
   GridContainer,
-  Hr,
+  Prueba,
   TaskContainer,
+  TaskTitle,
 } from "./App.styles";
 
 const App = () => {
@@ -114,25 +118,23 @@ const App = () => {
         {categories &&
           categories.map(({ id, title, tasks }) => (
             <TaskContainer key={id}>
-              <div>
-                <CategoryBox>
-                  <CategoryTitle>Category: {title}</CategoryTitle>
-                  <DeleteButton onClick={deleteCategory} value={id}>
-                    X
-                  </DeleteButton>
-                </CategoryBox>
-                <Hr />
-                {tasks.map((taskItem) => (
-                  <div key={taskItem.id}>
-                    <p>TaskTitle: {taskItem.title}</p>
-                    <p>Description: {taskItem.description}</p>
-                    <DeleteButton onClick={deleteTask} value={taskItem.id}>
+              <CategoryBox>
+                <CategoryTitle>{title}</CategoryTitle>
+                <DeleteCategoryButton onClick={deleteCategory} value={id}>
+                  X
+                </DeleteCategoryButton>
+              </CategoryBox>
+              {tasks.map((taskItem) => (
+                <DescriptionContainer key={taskItem.id}>
+                  <TaskTitle>{taskItem.title}</TaskTitle>
+                  <Prueba>
+                    <Description>{taskItem.description}</Description>
+                    <DeleteTaskButton onClick={deleteTask} value={taskItem.id}>
                       X
-                    </DeleteButton>
-                    <hr />
-                  </div>
-                ))}
-              </div>
+                    </DeleteTaskButton>
+                  </Prueba>
+                </DescriptionContainer>
+              ))}
             </TaskContainer>
           ))}
       </GridContainer>
