@@ -5,8 +5,10 @@ import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
 import {
+  CategoryBox,
   CategoryTitle,
   Container,
+  DeleteButton,
   FormContainer,
   GridContainer,
   Hr,
@@ -40,12 +42,11 @@ const App = () => {
     } else {
       setCategories((prevCategories) => [
         ...prevCategories,
-        { id: uuidv4(), title: categoryTitle, tasks: [] },
+        { id: `category-${uuidv4()}`, title: categoryTitle, tasks: [] },
       ]);
       setCategoryTitle("");
     }
   };
-
   const addTaskToCategory = (
     taskTitle: string,
     description: string,
@@ -58,7 +59,7 @@ const App = () => {
           tasks: [
             ...category.tasks,
             {
-              id: uuidv4(),
+              id: `task-${uuidv4()}`,
               title: taskTitle,
               description: description,
             },
@@ -66,6 +67,26 @@ const App = () => {
         };
       }
       return category;
+    });
+    setCategories(updatedCategories);
+  };
+
+  const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const categoryId = e.currentTarget.value;
+    const filterCategories = categories.filter(
+      (category) => category.id !== categoryId
+    );
+    setCategories(filterCategories);
+  };
+
+  const deleteTask = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const taskId = e.currentTarget.value;
+    const updatedCategories = categories.map((category) => {
+      const updatedTasks = category.tasks.filter((task) => task.id !== taskId);
+      return {
+        ...category,
+        tasks: updatedTasks,
+      };
     });
     setCategories(updatedCategories);
   };
@@ -94,12 +115,20 @@ const App = () => {
           categories.map(({ id, title, tasks }) => (
             <TaskContainer key={id}>
               <div>
-                <CategoryTitle>Category: {title}</CategoryTitle>
+                <CategoryBox>
+                  <CategoryTitle>Category: {title}</CategoryTitle>
+                  <DeleteButton onClick={deleteCategory} value={id}>
+                    X
+                  </DeleteButton>
+                </CategoryBox>
                 <Hr />
                 {tasks.map((taskItem) => (
                   <div key={taskItem.id}>
                     <p>TaskTitle: {taskItem.title}</p>
                     <p>Description: {taskItem.description}</p>
+                    <DeleteButton onClick={deleteTask} value={taskItem.id}>
+                      X
+                    </DeleteButton>
                     <hr />
                   </div>
                 ))}
