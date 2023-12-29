@@ -73,10 +73,10 @@ const App = () => {
 
   const deleteCategory = (e: React.MouseEvent<HTMLButtonElement>) => {
     const categoryId = e.currentTarget.value;
-    const filterCategoryId = categories.filter((category) => {
-      return category.id !== categoryId;
-    });
-    setCategories(filterCategoryId);
+    const filterCategories = categories.filter(
+      (category) => category.id !== categoryId
+    );
+    setCategories(filterCategories);
   };
 
   const deleteTask = (e: React.MouseEvent<HTMLButtonElement>) => {
