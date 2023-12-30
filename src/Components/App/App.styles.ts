@@ -95,30 +95,8 @@ export const TaskTitle = styled.p`
   text-align: center;
   font-size: 20px;
   font-style: italic;
-  color: #9775fa;
+  color: #9368ff;
   text-decoration: underline;
-
-  &::first-letter {
-    text-transform: uppercase;
-  }
-`;
-
-export const Prueba = styled.div`
-  max-height: 150px;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  align-items: center;
-`;
-
-export const Description = styled.p`
-  padding: 5px 0;
-  padding-right: 10px;
-  font-size: 14px;
-  text-align: justify;
-  margin: 0px;
 
   &::first-letter {
     text-transform: uppercase;
@@ -131,10 +109,11 @@ export const DeleteTaskButton = styled.button`
   border-radius: 7px;
   outline: none;
   border: none;
-  color: #9775fa;
+  color: #9368ff;
   cursor: pointer;
   display: flex;
   font-size: 10px;
+  font-weight: 600;
   height: 22px;
   justify-content: center;
   padding: 7px;
@@ -144,8 +123,29 @@ export const DeleteTaskButton = styled.button`
   transition: 0.4s ease;
 
   &:hover {
-    background-color: #9775fa;
+    background-color: #9368ff;
     color: #fff;
+  }
+`;
+
+export const InfoTask = styled.div`
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+`;
+
+export const Description = styled.p`
+  padding: 5px 0;
+  padding-right: 10px;
+  font-size: 14px;
+  text-align: justify;
+  margin: 0px;
+
+  &::first-letter {
+    text-transform: uppercase;
   }
 `;
 
@@ -167,11 +167,12 @@ export const EditButton = styled.button`
   height: 30px;
   width: 30px;
   border: none;
-  background-color: #9775fa;
+  background-color: #9368ff;
   color: white;
   font-weight: 500;
   cursor: pointer;
   border-radius: 7px;
+  align-self: center;
 
   &:hover {
     color: transparent;

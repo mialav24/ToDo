@@ -5,7 +5,7 @@ interface ButtonStyledProps {
 }
 
 export const ButtonStyled = styled.button<ButtonStyledProps>`
-  background-color: #6e7681;
+  background-color: #9775fa;
   border-radius: 8px;
   border: 1px solid transparent;
   cursor: pointer;
