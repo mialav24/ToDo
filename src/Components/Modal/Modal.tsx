@@ -63,7 +63,7 @@ const Modal = ({ closeModal, categories, addTaskToCategory }: ModalProps) => {
                 variant="secondary"
                 disabled={!taskTitle || !description || !selectedCategoryId}
               >
-                Submit
+                Create
               </Button>
               <Button type="button" variant="primary" onClick={closeModal}>
                 Close
