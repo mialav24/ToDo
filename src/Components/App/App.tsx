@@ -113,7 +113,7 @@ const App = () => {
           </Button>
         }
         {categories.length > 0 && (
-          <Button type="button" onClick={openModal} variant="primary">
+          <Button type="button" onClick={openModal} variant="secondary">
             Create a ToDo
           </Button>
         )}
